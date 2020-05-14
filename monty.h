@@ -33,15 +33,14 @@ typedef struct instruction_s
 } instruction_t;
 typedef struct auxiliar
 {
-	char *line;
+	FILE *monty_file;
 	stack_t *head;
 	char **matrix;
 	char coman[20];
-	int num;
 	int counter;
 }linehead;
 extern linehead args;
-char **tokenfunc();
+char **tokenfunc(char *line);
 void matrixfree();
 int funchandler();
 void push(stack_t **stack, unsigned int line_number);

@@ -25,8 +25,8 @@ stack_t *addnode(stack_t **stack, unsigned int line_number)
                 copy->prev = new_node;
         else
                 new_node->prev = NULL;
-	return (new_node);
-	/*******liberar memoria*******/
+	copy = *stack;
+	return(new_node);
 }
 void pint(stack_t **stack, unsigned int line_number)
 {
@@ -56,7 +56,6 @@ void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *copy = *stack;
 
-	printf("entre a pall\n");
 	for (;copy;copy=copy->next)
 		printf("%d\n", copy->n);
 }

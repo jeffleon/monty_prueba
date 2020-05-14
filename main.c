@@ -5,22 +5,19 @@ int main(int argc, char *argv[])
 {
 
 	ssize_t lines = 0;
-	FILE *file_monty;
-	char *longitud;
-	int length = 0;
-	int i;
+	char *line = NULL;
 	size_t line_size = 0;
+
 	args.counter = 0,
 	args.head = NULL;
 	args.matrix = NULL;
-	args.line = NULL;
 	if (argc != 2)
 	{
 		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	file_monty = fopen(argv[1],"r");
-	if (file_monty == NULL)
+	args.monty_file = fopen(argv[1],"r");
+	if (args.monty_file == NULL)
 	{
 		printf("Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
@@ -28,14 +25,16 @@ int main(int argc, char *argv[])
 	while(lines >= 0)
 	{
 		args.matrix = NULL;
-		args.line = NULL;
-		lines = getline(&args.line, &line_size,file_monty);
-                args.counter += 1;
-		args.matrix = tokenfunc();
-		free(args.line);
+		lines = getline(&line, &line_size,args.monty_file);
+                if (lines <= 0)
+			break;
+		args.counter += 1;
+		args.matrix = tokenfunc(line);
+		funchandler();
 		free(args.matrix);
 	}
-//	free_dlistint(args.head);
-	fclose(file_monty);
+	free(line);
+        free_dlistint(args.head);
+	fclose(args.monty_file);
 	return (0);
 }

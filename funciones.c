@@ -1,14 +1,13 @@
 #include "monty.h"
-char **tokenfunc()
+char **tokenfunc(char *line)
 {
-	char delim[3] = " \n\t";
+	char delim[4] = " \n\t";
 	char *token = NULL;
 	int i = 0;
 	int matrixsize = 0;
-	char *aux = NULL;
 	char **matrix = NULL;
 
-	token = strtok(args.line, delim);
+	token = strtok(line, delim);
 	matrixsize = 3;
         matrix = malloc(sizeof(char *) * matrixsize);
 
@@ -20,25 +19,12 @@ char **tokenfunc()
 	for (i = 0;token != NULL; i++)
 	{
 		matrix[i] = token;
-		printf("%s\n", matrix[i]);
 		token = strtok(NULL, delim);
 	}
 	matrix[i] = NULL;
 	return (matrix);
 }
 
-void matrixfree()
-{
-	int i = 0;
-	char **repit = args.matrix;
-
-	if (args.matrix && args.matrix[0])
-	{
-		for (i = 0; i < 3; i++)
-			free(repit[i]);
-		free(repit);
-	}
-}
 
 int funchandler()
 {

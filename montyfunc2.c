@@ -4,7 +4,7 @@ void add(stack_t **stack, unsigned int line_number)
 	stack_t *copy;
 	unsigned int numero = (*stack)->n;
 
-	pop(stack, 9); /*verificar numerito*/
+	pop(stack, args.counter);
 	copy = *stack;
 	copy->n = numero + copy->n;
 }
@@ -30,4 +30,3 @@ void free_dlistint(stack_t *head)
                 head = temp;
         }
 }
-
